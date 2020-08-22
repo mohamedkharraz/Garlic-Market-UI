@@ -1,0 +1,105 @@
+<div class="row">
+  <h1>Ticker Upload</h1>
+</div>
+
+<div class="container top-buffer">
+  <div class="row justify-content-center" align="center">
+    <div class="col-md-10">
+      <div class="input-group mb-3">
+        <label class="garlicode-file-label" for="tickersFile">{{
+          file ? file.name : "Choose File"
+        }}</label>
+        <input
+          type="file"
+          class="form-control garlice-custom-file"
+          id="tickersFile"
+          (change)="onChange($event)"
+          #tickersFile
+        />
+        <div class="input-group-prepend">
+          <label
+            class="input-group-text garlicode-file-upload-icon"
+            for="tickersFile"
+            ><i class="fas fa-upload"></i
+          ></label>
+        </div>
+        <div class="input-group-prepend garlicode-file-clear">
+          <div class="input-group-text garlicode-file-clear-icon">
+            <i class="far fa-times-circle" (click)="onClearClick($event)"></i>
+          </div>
+        </div>
+        <div class="input-group-prepend garlicode-file-clear">
+          <div class="input-group-text garlicode-file-info-icon" >
+            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" data-html="true" title="
+              Every line should contain a single Symbol.
+              Example:<br/>
+                AAPL<br/>
+                AMZN<br/>
+            " ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center" align="center">
+    <div class="col-md-10">
+      <ul id="stepper">
+        <li
+          [ngClass]="{
+            active: progress > 0,
+            failed: progress !== 100 && isFailed
+          }"
+          class="file-upload-progress fas fa-file-import"
+          style="--progress-width: {{ progress }}%"
+        >
+          Loading File
+        </li>
+        <li
+          [ngClass]="{ active: progress === 100, failed: isFailed }"
+          class="fas fa-tools"
+          style="--is-file-uploaded: {{
+            progress === 100 || isFailed ? 100 : 0
+          }}%"
+        >
+          Processing
+        </li>
+        <li
+          [ngClass]="{
+            'active fa-check-circle': isCompleted,
+            'failed fa-exclamation-circle': isFailed
+          }"
+          class="fas"
+          style="--is-file-uploaded: {{ isCompleted || isFailed ? 100 : 0 }}%"
+        >
+          {{ isCompleted ? "Completed" : isFailed ? "Failed" : "" }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 top-buffer">
+      <div *ngIf="progress === 100" class="garlic-valid">
+        Files Uploaded Successfully
+      </div>
+      <div *ngIf="progress === 100" class="garlic-valid">
+        Processing...
+      </div>
+      <div *ngIf="isCompleted" class="garlic-valid">
+        Request Completed Successfully
+      </div>
+      <div *ngIf="isFailed" class="garlic-error">{{ error }}</div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center top-buffer" align="center">
+    <div class="col-md-6">
+      <button
+        type="button"
+        class="btn btn-success mb-2"
+        (click)="send()"
+        [disabled]="!file"
+      >
+        Upload Tickers
+      </button>
+    </div>
+  </div>
+</div>
+

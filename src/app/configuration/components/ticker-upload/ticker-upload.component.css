@@ -1,0 +1,128 @@
+.garlicode-btn-clear {
+  background-color: #e9ecef;
+  color: #495059;
+  box-sizing: border-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.garlicode-file-label-deleted {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.garlicode-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  padding: 0.375rem 0.75rem;
+  border: 1.5px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.garlicode-file-clear {
+  z-index: 2;
+}
+
+.garlice-custom-file {
+  opacity: 0;
+}
+
+.top-buffer {
+  margin-top: 2.5%;
+}
+
+.garlicode-file-upload-icon {
+  background-color: #52bad6;
+  color: white;
+}
+
+.garlicode-file-clear-icon {
+  background-color: #d33f4a;
+  color: white;
+}
+
+.garlicode-file-info-icon {
+  background-color: #0c6df6;
+  color: white;
+}
+
+
+/**
+  *** Progresser Style ***
+**/
+
+#stepper li {
+  position: relative;
+  float: left;
+  width: 33.33%;
+  list-style-type: none;
+  font-size: 12px;
+}
+
+#stepper li::before {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e6e6e6;
+  color: white;
+  font-size: 24px;
+  line-height: 48px;
+  z-index: 2;
+}
+
+#stepper li::after {
+  content: "";
+  position: absolute;
+  width: var(--is-file-uploaded);
+  height: 2px;
+  background-color: #e6e6e6;
+  left: 0;
+  top: 25px;
+  z-index: 0;
+}
+
+#stepper li.file-upload-progress::after {
+  width: var(--progress-width);
+}
+#stepper li.file-upload-progress.failed::after {
+  width: 100%;
+}
+
+#stepper li.active::before,
+#stepper li.active::after {
+  background-image: linear-gradient(to right, #02aab0, #00cdac);
+}
+
+#stepper li.failed::before,
+#stepper li.failed::after {
+  background-image: linear-gradient(to right, #ff512f, #dd2476);
+}
+
+.garlic-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+.garlic-valid {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #28a745;
+}
