@@ -1,0 +1,143 @@
+<div class="row garlic-purple-love bottom-buffer">
+  <h1>Corporate LookUp</h1>
+</div>
+
+<div class="row justify-content-center bottom-top bottom-buffer">
+  <input class="form-control col-md-8" type="search" placeholder="Enter Corporate Ticker and hit Enter ..."
+    aria-label="Search" #search [(ngModel)]="ticker" (keyup.enter)="onKeyEnter()" />
+</div>
+
+<div class="container-fluid top-buffer">
+  <div class="row justify-content-center">
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show col-md-8" role="alert">
+      <strong>{{ error }}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetAlerts()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="loading" class="alert alert-primary alert-dismissible fade show col-md-8" role="alert">
+      <strong><i class="fas fa-spinner fa-spin"></i> Processing your request ...</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetAlerts()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="profile">
+    <div class="col-md-8 order-md-1 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="garlic-purple-love garlic-lookup-company-title">{{ profile.corporate.name }}</h5>
+        <h5 class="badge garlic-badge"><span
+            class="garlic-price">{{ profile.statistics.price  | currency:profile.corporate.currency.isoCode:'symbol':'1.2-3'}}</span>
+        </h5>
+      </h4>
+    </div>
+  </div>
+  <div class="row justify-content-center" *ngIf="profile">
+
+    <div class="col-md-6 order-md-1 mb-4">
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Currency</h6>
+          <strong class="garlic-purple-love">{{ profile.corporate.currency.isoCode }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Country</h6>
+          <strong class="garlic-purple-love">{{ profile.corporate.country }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Sector</h6>
+          <strong class="garlic-purple-love">{{ profile.corporate.sector.label }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Industry</h6>
+          <strong class="garlic-purple-love">{{ profile.corporate.industry.label }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Dividend Rate</h6>
+          <strong
+            class="garlic-purple-love">{{ profile.statistics.dividendRate | currency: profile.corporate.currency.isoCode:'symbol':'1.2-3' }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Dividend Yield</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.dividendYield | percent:'1.2-2' }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Payout Ratio</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.payoutRatio | percent:'1.2-2' }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>EPS</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.epsFmt }}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 order-md-2 mb-4">
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <h6>Day Range</h6>
+              </div>
+              <div class="col-1">{{ profile.statistics.dayLow}}</div>
+              <div class="col-6">
+                <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="profile.statistics.price"
+                  [min]="profile.statistics.dayLow" [max]="profile.statistics.dayHigh" style="pointer-events: none;">
+                </mat-slider>
+              </div>
+              <div class="col-1">{{ profile.statistics.dayHigh}}</div>
+
+            </div>
+          </div>
+
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <h6>52-W Range</h6>
+              </div>
+              <div class="col-1">{{ profile.statistics.yearLow}}</div>
+              <div class="col-6">
+                <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="profile.statistics.price"
+                  [min]="profile.statistics.yearLow" [max]="profile.statistics.yearHigh" style="pointer-events: none;">
+                </mat-slider>
+              </div>
+              <div class="col-1">{{ profile.statistics.yearHigh}}</div>
+
+            </div>
+          </div>
+          <!--<strong
+            class="garlic-purple-love">{{ profile.statistics.yearLow + ' - ' + profile.statistics.yearHigh }}</strong>-->
+
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Market Cap</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.marketCapFmt }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Shares Outstanding</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.sharesOutstandingFmt }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Revenue</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.revenueFmt }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Net Income</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.netIncomeFmt }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>Profit Margin</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.profitMargin | percent:'1.2-2' }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bottom-buffer">
+          <h6>P/E Ratio</h6>
+          <strong class="garlic-purple-love">{{ profile.statistics.peRatio | number:'1.2-2' }}</strong>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

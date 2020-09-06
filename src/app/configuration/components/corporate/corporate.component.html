@@ -1,1 +1,139 @@
-Configuration Page To-Do
+<div class="row justify-content-start garlic-purple-love bottom-buffer">
+  <h1>Corporates</h1>
+</div>
+<div *ngIf="initiating; then loadingBlock; else mainBlock"></div>
+<ng-template #loadingBlock>
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"> <span class="sr-only">Loading...</span>
+  </div>
+</ng-template>
+<ng-template #mainBlock>
+  <div class="container-fluid top-buffer">
+    <div class="row justify-content-center">
+      <div *ngIf="success" class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
+        <strong>{{ success }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetAlerts()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show col-md-8" role="alert">
+        <strong>{{ error }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetAlerts()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="loading" class="alert alert-primary alert-dismissible fade show col-md-8" role="alert">
+        <strong><i class="fas fa-spinner fa-spin"></i> Processing your request ...</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetAlerts()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="row bottom-buffer">
+      <input class="form-control col-md-6" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filter"
+        #search />
+    </div>
+
+
+
+    <div class="row justify-content-end garlic-title" style="padding-right: 5%" align="center" data-toggle="modal"
+      data-target="#addCorporate">
+      <i class="fas fa-plus fa-lg"></i>
+    </div>
+    <div class="row" *ngIf="!initiating">
+      <table class="table top-buffer">
+        <thead>
+          <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Corporate</th>
+            <th scope="col">Country</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Industry</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="!items">No corporates found</tr>
+          <tr *ngFor="let corporate of items; index as index">
+            <th scope="row">{{ corporate.ticker }}</th>
+            <div *ngIf="corporatesEditMode[index]; then editBlock else displayBlock"></div>
+            <ng-template #displayBlock>
+              <td>{{ corporate.name }}</td>
+              <td>{{ corporate.country }}</td>
+              <td>{{ corporate.currency.isoCode }}</td>
+              <td>{{ corporate.sector ? corporate.sector.label : '' }}</td>
+              <td>{{ corporate.industry ? corporate.industry.label : '' }}</td>
+              <td>
+                <i class="fas fa-edit fa-lg garlic-purple-love" style="padding: 5%; margin-right: 5%"
+                  (click)="edit(corporate, index)"></i>
+                <i class="far fa-trash-alt fa-lg garlic-blood-mary" style="padding: 5%; margin-right: 5%"></i>
+              </td>
+            </ng-template>
+            <ng-template #editBlock>
+              <td>
+                <input type="text" class="form-control" placeholder="{{ corporate.name }}"
+                  [(ngModel)]="corporate.name" />
+              </td>
+              <td>
+                <input type="text" class="form-control" placeholder="{{ corporate.country }}"
+                  [(ngModel)]="corporate.country" />
+              </td>
+              <td>
+                <select class="form-control" (change)="currencyChange($event, index)">
+                  <option *ngFor="let currency of currencies"
+                    [selected]="currency.isoCode === corporate.currency.isoCode">{{ currency.isoCode }}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" (change)="sectorChange($event, index)">
+                  <option *ngFor="let sector of sectors" [selected]="sector.label === corporate.sector.label">
+                    {{ sector.label }}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" (change)="industryChange($event, index)">
+                  <option *ngFor="let industry of industries" [selected]="corporate.industry.label === industry.label">
+                    {{ industry.label }}</option>
+                </select>
+              </td>
+              <td>
+                <i class="far fa-check-square fa-lg garlic-green-beach" style="padding: 5%; margin-right: 5%"
+                  (click)="confirmEdit(index)"></i>
+                <i class="far fa-window-close fa-lg garlic-blood-mary" style="padding: 5%; margin-right: 5%"
+                  (click)="cancel(index)"></i>
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row justify-content-center">
+      <garlic-pagination [items]="corporates" (actualise)="actualise($event)" [filterToken]="filter" [f]="f"></garlic-pagination>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addCorporate" tabindex="-1" role="dialog" aria-labelledby="addCorporateLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCorporateLabel">Add Corporate</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #addCorporateCloseBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="corporateTicker" class="col-form-label">Ticker:</label>
+            <input type="text" class="form-control" id="corporateTicker" placeholder="Enter Corporate Ticker here..."
+              [(ngModel)]="newTicker">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addCorporate()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

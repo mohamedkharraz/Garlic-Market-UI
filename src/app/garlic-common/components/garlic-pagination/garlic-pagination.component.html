@@ -1,0 +1,13 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 1}" (click)="paginate('first')"><a
+        class="page-link">&#60;&#60;</a></li>
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 1}" (click)="paginate('prev')"><a
+        class="page-link">&#60;</a></li>
+    <li class="page-item active"><a class="page-link">{{ currentPage | number: '1.0-0' }}</a></li>
+    <li class="page-item" [ngClass]="{'disabled': max === 0 || currentPage === max}" (click)="paginate('next')"><a
+        class="page-link">&#62;</a></li>
+    <li class="page-item" [ngClass]="{'disabled': max === 0 || currentPage === max}" (click)="paginate('last')"><a
+        class="page-link">&#62;&#62;</a></li>
+  </ul>
+</nav>

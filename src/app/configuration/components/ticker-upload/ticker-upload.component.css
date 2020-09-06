@@ -41,10 +41,6 @@
   opacity: 0;
 }
 
-.top-buffer {
-  margin-top: 2.5%;
-}
-
 .garlicode-file-upload-icon {
   background-color: #52bad6;
   color: white;
@@ -59,7 +55,6 @@
   background-color: #0c6df6;
   color: white;
 }
-
 
 /**
   *** Progresser Style ***

@@ -1,0 +1,28 @@
+@import "~@angular/material/theming";
+@import "~@angular/material/theming";
+
+$custom-typography: mat-typography-config(
+  $font-family: '"Lexend Peta", sans-serif;',
+  /*$headline: mat-typography-level(32px, 48px, 600),
+  $body-1: mat-typography-level(24px, 32px, 600),*/
+);
+@include mat-core($custom-typography);
+
+.mat-h1,
+.mat-headline,
+* h1,
+.mat-h2,
+.mat-title,
+* h2,
+.mat-h3,
+.mat-subheading-2,
+* h3,
+.mat-h4,
+.mat-subheading-1,
+* h4,
+.mat-h5,
+* h5,
+.mat-h6,
+* h6 {
+  margin: 0 !important;
+}

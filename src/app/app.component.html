@@ -1,74 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+<nav class="navbar navbar-expand-md navbar-dark garlic-bg">
+  <a class="navbar-brand" href="#">
+    <img src="assets/img/logo/1.0.png" width="30" height="30" alt="" loading="lazy" />
+    Garlic Market
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <title>Hello, world!</title>
-  </head>
-
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark">
-      <a class="navbar-brand" href="#">
-        <img
-          src="assets/img/logo/1.0.png"
-          width="30"
-          height="30"
-          alt=""
-          loading="lazy"
-        />
-        Garlic Market
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="dropdown01"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >Configuration</a
-            >
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" routerLink="/ticker-upload">Ticker Upload</a>
-              <a class="dropdown-item" routerLink="/corporate">Corporate</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <main role="main" class="container">
-      <div class="garlicode-template">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
-  </body>
-</html>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/garlic-screener">GarlicScreener</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/lookup">LookUp</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Configuration</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" routerLink="/ticker-upload">Ticker Upload</a>
+          <a class="dropdown-item" routerLink="/corporate">Corporate</a>
+          <a class="dropdown-item" href="#">More Coming Soon...</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid garlicode-template" role="main">
+  <router-outlet></router-outlet>
+</div>

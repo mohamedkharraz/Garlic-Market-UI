@@ -1,0 +1,18 @@
+li{
+  font-weight: 600;
+}
+
+li.disabled{
+  color: #EBEBE4;
+  cursor: not-allowed;
+}
+
+
+.page-item.active .page-link{
+  background-image: linear-gradient(to right, #cc2b5e, #753a88) !important;
+}
+
+.page-link{
+  color: #cc2b5e;
+  border-color: #cc2b5e!important;
+}

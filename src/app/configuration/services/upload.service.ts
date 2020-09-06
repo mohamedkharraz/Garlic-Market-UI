@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UploadService {
-  private domain = '127.0.0.1';
-  private port = '7070';
-  private protocol = 'http://';
 
   private uploadFileEndPoint = '/utils/tickers-upload';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+
 
   uploadTickersFile(file: File) {
     const formData = new FormData();
@@ -19,7 +19,7 @@ export class UploadService {
 
     const req = new HttpRequest(
       'POST',
-      `${this.protocol}${this.domain}:${this.port}${this.uploadFileEndPoint}`,
+      `${environment.apiUrl}${this.uploadFileEndPoint}`,
       formData,
       { reportProgress: true }
     );
@@ -30,4 +30,6 @@ export class UploadService {
       { reportProgress: true }
     );*/
   }
+
+
 }

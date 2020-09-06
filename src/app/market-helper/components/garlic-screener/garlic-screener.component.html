@@ -1,0 +1,312 @@
+<div class="row garlic-purple-love bottom-buffer">
+  <h1>Garlic Screener</h1>
+</div>
+
+<div class="container-fluid top-buffer">
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header">Selection Criteria</h5>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <garlic-toggle (changed)="marketCapC = $event">Market Cap</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="divYieldC = $event">Dividend Yield</garlic-toggle>
+            </li>
+            <!--<li class="list-group-item">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="divYieldC" [(ngModel)]="divYieldC">
+                <label class="custom-control-label" for="divYieldC">Dividend Yield</label>
+              </div>
+            </li>-->
+            <li class="list-group-item">
+              <garlic-toggle (changed)="payoutRatioC = $event">Payout Ratio</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="peRatioC = $event">peRatio</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="revenueC = $event">Revenue</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="netIncomeC = $event">Net Income</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="profitMarginC = $event">Profit Margin</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="epsC = $event">EPS</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="debtToEquityC = $event">Debt to Equity</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="countryC = $event">Country</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="sectorC = $event">Sector</garlic-toggle>
+            </li>
+            <li class="list-group-item">
+              <garlic-toggle (changed)="industryC = $event">Industry</garlic-toggle>
+            </li>
+            <li class="list-group-item justify-content-center">
+              <button type="button" class="btn btn-lg btn-block garlic-bg" (click)="screenTheMarket()">GO!</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="col-md" *ngIf="marketCapC">
+        <div class="card">
+          <h5 class="card-header">Market Capitalization</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="marketCapOperator">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-7">
+                <input class="form-control" type="number" placeholder="Enter Capitalization value then choose the unit"
+                  [(ngModel)]="marketCap">
+              </div>
+              <div class="col-2">
+                <select class="form-control" [(ngModel)]="marketCapUnit">
+                  <option [ngValue]="unit.THOUSAND">k</option>
+                  <option [ngValue]="unit.MILLION">M</option>
+                  <option [ngValue]="unit.BILLION">B</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="divYieldC">
+        <div class="card">
+          <h5 class="card-header">Dividend Yield</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="dividendYieldOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-9">
+                <mat-slider class="w-100" thumbLabel [displayWith]="labelPercentage" tickInterval="'auto"
+                  [value]="dividiendYield" [min]="0" [max]="100" [(ngModel)]="dividiendYield">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="payoutRatioC">
+        <div class="card">
+          <h5 class="card-header">Payout Ratio</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="payoutRatioOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-9">
+                <mat-slider class="w-100" thumbLabel [displayWith]="labelPercentage" tickInterval="'auto"
+                  [value]="payoutRatio" [min]="0" [max]="100" [(ngModel)]="payoutRatio">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="peRatioC">
+        <div class="card">
+          <h5 class="card-header">P/E Ratio</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2">
+                <select class="form-control" [(ngModel)]="peRatioOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-10">
+                <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="peRatio" [min]="0" [max]="100"
+                  [(ngModel)]="peRatio">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="revenueC">
+        <div class="card">
+          <h5 class="card-header">Revenue</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="revenueOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-7">
+                <input class="form-control" type="number" placeholder="Enter Capitalization value then choose the unit"
+                  [(ngModel)]="revenue">
+              </div>
+              <div class="col-2">
+                <select class="form-control" [(ngModel)]="revenueUnit">
+                  <option [ngValue]="unit.THOUSAND">k</option>
+                  <option [ngValue]="unit.MILLION">M</option>
+                  <option [ngValue]="unit.BILLION">B</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="netIncomeC">
+        <div class="card">
+          <h5 class="card-header">Net Income</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="netIncomeOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-7">
+                <input class="form-control" type="number" placeholder="Enter Capitalization value then choose the unit"
+                  [(ngModel)]="netIncome">
+              </div>
+              <div class="col-2">
+                <select class="form-control" [(ngModel)]="netIncomeUnit">
+                  <option [ngValue]="unit.THOUSAND">k</option>
+                  <option [ngValue]="unit.MILLION">M</option>
+                  <option [ngValue]="unit.BILLION">B</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="profitMarginC">
+        <div class="card">
+          <h5 class="card-header">Profit Margin</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="profitMarginOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-9">
+                <mat-slider class="w-100" thumbLabel [displayWith]="labelPercentage" tickInterval="'auto"
+                  [value]="profitMargin" [min]="0" [max]="100" [(ngModel)]="profitMargin">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="epsC">
+        <div class="card">
+          <h5 class="card-header">Earning Per Share</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="epsOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-9">
+                <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="0" [min]="0" [max]="10" step="0.1"
+                  [(ngModel)]="eps">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="debtToEquityC">
+        <div class="card">
+          <h5 class="card-header">Debt to Equity</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-control" [(ngModel)]="debtToEquityOp">
+                  <option [ngValue]="operator.SUPERIOR">Superior than</option>
+                  <option [ngValue]="operator.INFERIOR">Inferior than</option>
+                </select>
+              </div>
+              <div class="col-9">
+                <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="0" [min]="0" [max]="20" step="0.1"
+                  [(ngModel)]="debtToEquity">
+                </mat-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="countryC">
+        <div class="card">
+          <h5 class="card-header">Country</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <select class="custom-select" size="4" multiple [(ngModel)]="country">
+                  <option [ngValue]="'United States'">United States</option>
+                  <option [ngValue]="'France'">France</option>
+                  <option [ngValue]="'Germany'">Germany</option>
+                  <option [ngValue]="'Canada'">Canada</option>
+                  <option [ngValue]="'Spain'">Spain</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="sectorC">
+        <div class="card">
+          <h5 class="card-header">Sector</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <select class="custom-select" size="4" multiple [(ngModel)]="sector">
+                  <option [ngValue]="'Technology'">Technology</option>
+                  <option [ngValue]="'Energy'">Energy</option>
+                  <option [ngValue]="'Basic Materials'">Basic Materials</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="industryC">
+        <div class="card">
+          <h5 class="card-header">Industry</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <select class="custom-select" size="4" multiple [(ngModel)]="industry">
+                  <option [ngValue]="'Consumer Electronics'">Consumer Electronics</option>
+                  <option [ngValue]="'Internet Retail'">Internet Retail</option>
+                  <option [ngValue]="'Oil & Gas Integrated'">Oil & Gas Integrated</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

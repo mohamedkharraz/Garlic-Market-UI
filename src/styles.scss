@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./custom-theme.scss";
+
+.garlic-bg {
+  color: #fff;;
+  background-image: linear-gradient(to right, #cc2b5e, #753a88); /*Purple Love*/
+  /*
+      Alternatives:
+          - Green Beach: background-image: linear-gradient(to right, #02aab0, #00cdac);
+          - Blood Mary: background-image: linear-gradient(to right, #ff512f, #dd2476);
+          - Fly High: background-image: linear-gradient(to right, #6f86d6, #48c6ef);
+          - Aqua Splash: background-image: linear-gradient(to right, #13547a, #80d0c7);
+  */
+}
+
+.garlicode-template {
+  padding: 2% 10%;
+}
+
+.top-buffer {
+  margin-top: 2%;
+}
+
+.bottom-buffer {
+  margin-bottom: 3.5%;
+}
+
+.garlic-purple-love {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #cc2b5e), color-stop(1, #753a88));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.garlic-blood-mary {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff512f), color-stop(1, #dd2476));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.garlic-green-beach {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #02aab0), color-stop(1, #00cdac));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}

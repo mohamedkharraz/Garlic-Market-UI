@@ -1,0 +1,47 @@
+::ng-deep {
+  .list-group-item {
+    border: none;
+    border-bottom: 2px solid;
+    border-image-source: linear-gradient(to right, #cc2b5e, #753a88);
+    border-image-slice: 1;
+  }
+  .garlic-badge {
+    background-image: linear-gradient(to right, #cc2b5e, #753a88);
+  }
+
+  .garlic-price {
+    color: white;
+  }
+  /*mat-slider {
+    width: 300px;
+  }*/
+  .mat-slider-thumb-label {
+    transform: rotate(45deg) !important;
+    border-radius: 100% 100% 0 !important;
+    background-image: linear-gradient(to right, #cc2b5e, #753a88);
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  .mat-slider-thumb {
+    transform: scale(0) !important;
+  }
+
+  .mat-slider-thumb-label-text {
+    opacity: 0 !important;
+  }
+
+  .mat-slider-horizontal .mat-slider-thumb-label {
+    top: -30px !important;
+  }
+
+  .mat-slider-horizontal{
+    height: fit-content!important;
+  }
+
+  .garlic-lookup-company-title{
+    font-size: 30px!important;
+  }
+
+
+}

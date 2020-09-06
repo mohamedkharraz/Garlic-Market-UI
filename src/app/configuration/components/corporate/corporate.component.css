@@ -1,0 +1,8 @@
+table > thead > tr > th, table > tbody > tr > th,table > tbody > tr > td{
+  border-color: #753a88;
+}
+
+.spinner-border{
+  border-color: #cc2b5e;
+  border-right-color: transparent;
+}

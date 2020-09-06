@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 import { HttpEventType } from '@angular/common/http';
+import { handleError } from '../../../garlic-common/Utils';
 
 declare var $:any;
 
@@ -49,13 +50,7 @@ export class TickerUploadComponent implements OnInit {
       (err) => {
         console.log(err);
         this.isFailed = true;
-        this.error = `[${err.error.status ? err.error.status : 'Error'} ${
-          err.error.error ? err.error.error : ''
-        }]: ${
-          err.error.message
-            ? err.error.message
-            : 'Error while processing your file'
-        }`;
+        this.error = handleError(err);
       },
       () => {
         this.isCompleted = true;
