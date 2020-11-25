@@ -1,0 +1,29 @@
+
+
+::ng-deep{
+
+  .hiddenRow {
+    padding: 0 !important;
+  }
+
+  /*.mat-slider-horizontal .mat-slider-thumb-label {
+    top: -40px !important;
+  }
+
+  .mat-slider-thumb-label {
+    width: 32px !important;
+    height: 32px !important;
+  }*/
+  .mat-slider-thumb-label-text {
+    opacity: 0 !important;
+  }
+
+  .garlic-no-padding{
+    padding: 0;
+  }
+  .garlic-pointer{
+    cursor: pointer;
+  }
+}
+
+

@@ -1,0 +1,99 @@
+<div class="container-fluid top-buffer">
+
+  <div class="row">
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+      Tooltip on top
+    </button>
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right"
+      title="Tooltip on right">
+      Tooltip on right
+    </button>
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+      title="Tooltip on bottom">
+      Tooltip on bottom
+    </button>
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+      Tooltip on left
+    </button>
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true"
+      title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+      Tooltip with HTML
+    </button>
+  </div>
+
+
+  <div class="row">
+    <table class="table" style="border-collapse:collapse;">
+      <thead>
+        <tr class="text-center justify-content-center">
+          <th scope="col">Corporate</th>
+          <th scope="col">Ticker</th>
+          <th class="text-center">
+            <div class="row">
+              <div class="col-8 garlic-no-padding garlic-pointer">Some Text</div>
+              <div class="col-2 garlic-no-padding">
+                <div class="d-flex flex-column">
+                  <i class="fas fa-sort-up"></i>
+                  <i class="fas fa-sort-down"></i>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th scope="col">Dividend Yield</th>
+          <th scope="col">Payout Ratio</th>
+          <th scope="col">Revenue</th>
+          <th scope="col">Net Income</th>
+          <th scope="col">Profit Margin</th>
+          <th scope="col">EPS</th>
+          <th scope="col">P/E Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template [ngIf]="true">
+          <tr class="text-center" data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+            <th scope="row">Corporate Name</th>
+            <td>CORP.ME</td>
+            <td>1B</td>
+            <td>2.5%</td>
+            <td>25%</td>
+            <td>300M</td>
+            <td>60M</td>
+            <td>20%</td>
+            <td>5.7</td>
+            <td>15</td>
+          </tr>
+          <tr class="text-center">
+            <td colspan="14" class="hiddenRow">
+              <div class="accordian-body collapse top-buffer bottom-buffer" id="demo1">
+                <div class="row justify-content-center">
+                  <div class="col-1">10</div>
+                  <div class="col-8" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                    <mat-slider class="w-100" thumbLabel tickInterval="'auto" [value]="1095" [min]="10" [max]="1200"
+                      style="pointer-events: none;">
+                    </mat-slider>
+                  </div>
+                  <div class="col-1">123</div>
+                </div>
+
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template>
+          <tr class="text-center">
+            <th scope="row">Corporate Name</th>
+            <td>2-CORP.ME</td>
+            <td>2-1B</td>
+            <td>2-2.5%</td>
+            <td>2-25%</td>
+            <td>2-300M</td>
+            <td>2-60M</td>
+            <td>2-20%</td>
+            <td>2-5.7</td>
+            <td>2-15</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>
